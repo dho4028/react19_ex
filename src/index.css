@@ -44,3 +44,9 @@
 		background-color: oklch(var(--point-color) / 0.8);
 	}
 }
+
+/* 기존 유틸리티 클래스 내용 덮어쓰기 (수정) */
+@utility text-xs {
+	font-size: 11px;
+	line-height: 1.2;
+}
