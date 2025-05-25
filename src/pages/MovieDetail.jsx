@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieInfo from '../components/MovieInfo';
 import BgDetail from '../components/BgDetail';
+import Modal from '../components/Modal';
 
 export default function MovieDetail() {
 	const { id } = useParams();
 	const [Detail, setDetail] = useState(null);
 	const [Trailer, setTrailer] = useState(null);
+	const [Open, setOpen] = useState(false);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const BASE_URL = 'https://api.themoviedb.org/3/movie';
@@ -36,11 +39,23 @@ export default function MovieDetail() {
 		fetchData();
 	}, [id]);
 	return (
-		<section className='w-full h-screen theme-bg relative px-[10vw] pt-[17vh] pb-[6vh] overflow-hidden'>
+		<section className='w-full h-screen theme-bg relative px-[10vw] pt-[17vh] pb-[6vh] overflow-hidden max-xl:overflow-auto max-xl:h-auto'>
 			{Detail && (
 				<>
 					<BgDetail Detail={Detail} />
-					<MovieInfo Detail={Detail} Trailer={Trailer} />
+					<MovieInfo
+						Detail={Detail}
+						Trailer={Trailer}
+						setOpen={() => setOpen(true)}
+					/>
+
+					<Modal open={Open} onClose={() => setOpen(false)}>
+						<h2>영화 예고편</h2>
+						<iframe
+							src={`https://www.youtube.com/embed/${Trailer?.key}`}
+							className='size-full object-cover'
+						/>
+					</Modal>
 				</>
 			)}
 		</section>
