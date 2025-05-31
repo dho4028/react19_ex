@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MovieInfo({ Detail, Trailer, setOpen }) {
 	const navigate = useNavigate();
 	return (
-		<div className='relative w-9/12 h-full pr-20 theme-text flex flex-wrap content-between max-xl:w-full max-xl:pr-0'>
+		<div className='relative w-9/12 h-full pr-10 theme-text flex flex-wrap content-between max-xl:w-full max-xl:pr-0'>
 			<article className='relative flex flex-wrap w-full gap-10'>
 				<h1 className='w-full text-[5vmax] font-hanna leading-none'>
 					{Detail?.title}

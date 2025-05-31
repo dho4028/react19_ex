@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 import MovieInfo from '../components/MovieInfo';
 import BgDetail from '../components/BgDetail';
 import Modal from '../components/Modal';
+import Spinner from '../components/Spinner';
+import ReviewForm from '../components/ReviewForm';
 
 export default function MovieDetail() {
 	const { id } = useParams();
 	const [Detail, setDetail] = useState(null);
 	const [Trailer, setTrailer] = useState(null);
 	const [Open, setOpen] = useState(false);
+	const [Loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -34,12 +37,13 @@ export default function MovieDetail() {
 				console.log(err);
 			} finally {
 				console.log('complete');
+				setLoading(false);
 			}
 		};
 		fetchData();
 	}, [id]);
 	return (
-		<section className='w-full h-screen theme-bg relative px-[10vw] pt-[17vh] pb-[6vh] overflow-hidden max-xl:overflow-auto max-xl:h-auto'>
+		<section className='w-full h-screen min-h-[800px] theme-bg relative px-[10vw] pt-[17vh] pb-[6vh] overflow-hidden max-xl:overflow-auto max-xl:h-auto flex flex-wrap'>
 			{Detail && (
 				<>
 					<BgDetail Detail={Detail} />
@@ -48,6 +52,9 @@ export default function MovieDetail() {
 						Trailer={Trailer}
 						setOpen={() => setOpen(true)}
 					/>
+
+					{Loading && <Spinner />}
+					<ReviewForm />
 
 					<Modal open={Open} onClose={() => setOpen(false)}>
 						<h2>영화 예고편</h2>

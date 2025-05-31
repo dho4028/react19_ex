@@ -12,6 +12,20 @@
 	--theme-text: 0.1 0 0;
 	--point-color: 0.7 0.16 240;
 	--color-black: oklch(0.1 0 0);
+
+	/* 커스텀 키프레임을 통한 애니메이션 구문 테마 변수에 등록 */
+	--animate-wiggle: wiggle 1s ease-in-out infinite;
+
+	/* 커스텀 키프레임 등록 */
+	@keyframes wiggle {
+		0%,
+		100% {
+			transform: rotate(-20deg);
+		}
+		50% {
+			transform: rotate(20deg);
+		}
+	}
 }
 /* 다크모드 일때 덮어쓸 스타일 색상 변수 */
 [data-mode='dark'] {

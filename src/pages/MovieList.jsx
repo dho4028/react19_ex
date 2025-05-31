@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Card from '../components/Card';
+import Spinner from '../components/Spinner';
 
 export default function MovieList() {
 	const [MovieData, setMovieData] = useState([]);
@@ -31,7 +32,7 @@ export default function MovieList() {
 
 	return (
 		<section className='w-full fixed h-screen top-0 right-0 px-[10vw] py-30 overflow-y-auto custom-scroll grid grid-cols-5 gap-10 justify-items-center max-2xl:grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2'>
-			{Loading && <p>Loading...</p>}
+			{Loading && <Spinner />}
 
 			{MovieData.map((data) => {
 				return <Card key={`${data.id}`} data={data} />;
